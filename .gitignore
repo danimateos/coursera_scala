@@ -1,0 +1,10 @@
+target/
+.ensime
+.ensime_cache/
+.worksheet
+.sc
+.cache
+.classpath
+.metadata/
+.project
+
