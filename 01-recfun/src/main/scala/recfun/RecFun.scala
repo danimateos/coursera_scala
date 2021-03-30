@@ -14,15 +14,40 @@ object RecFun extends RecFunInterface {
   /**
    * Exercise 1
    */
-  def pascal(c: Int, r: Int): Int = ???
+  def pascal(c: Int, r: Int): Int = {
+    if (c == 0 || c == r) return 1
+
+    pascal(c - 1, r - 1) + pascal(c, r - 1)
+  }
 
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+
+    def runningCount(chars: List[Char], count: Int): Boolean = {
+        if (chars.isEmpty && count == 0) true
+        else if (count < 0 || (chars.isEmpty && count != 0)) false
+        else if (chars.head == '(')
+          runningCount(chars.tail, count + 1)
+        else if (chars.head == ')')
+          runningCount(chars.tail, count - 1)
+        else runningCount(chars.tail, count)
+      }
+
+    runningCount(chars, 0)
+  }
 
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+    if (coins.isEmpty || money < 0 || (coins.length == 1 && (money % coins.head != 0))) 0
+    else if (money == 0 || (coins.length == 1 && (money % coins.head == 0))) 1
+    else {
+      val sortedCoins = coins.sortWith(_ > _)
+      countChange(money - sortedCoins.head, sortedCoins) +
+        countChange(money, sortedCoins.tail)
+    }
+  }
 }
