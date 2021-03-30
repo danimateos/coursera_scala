@@ -1,5 +1,7 @@
 package recfun
 
+import scala.annotation.tailrec
+
 object RecFun extends RecFunInterface {
 
   def main(args: Array[String]): Unit = {
@@ -15,9 +17,9 @@ object RecFun extends RecFunInterface {
    * Exercise 1
    */
   def pascal(c: Int, r: Int): Int = {
-    if (c == 0 || c == r) return 1
-
-    pascal(c - 1, r - 1) + pascal(c, r - 1)
+    if (c == 0 || c == r) 1
+    else
+      pascal(c - 1, r - 1) + pascal(c, r - 1)
   }
 
   /**
@@ -25,6 +27,7 @@ object RecFun extends RecFunInterface {
    */
   def balance(chars: List[Char]): Boolean = {
 
+    @tailrec
     def runningCount(chars: List[Char], count: Int): Boolean = {
         if (chars.isEmpty && count == 0) true
         else if (count < 0 || (chars.isEmpty && count != 0)) false
