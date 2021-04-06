@@ -1,4 +1,5 @@
 import scala.annotation.tailrec
+import funsets.FunSets
 
 // Exercise in video 2.1
 def sum(f: Int => Int)(a: Int, b: Int): Int = {
@@ -53,12 +54,18 @@ class Rational(x: Int, y: Int) {
 
   override def toString = x + "/" + y
 
-  def add(other: Rational) = new Rational(numer * other.denom + denom * other.numer, denom * other.denom)
+  def + (other: Rational) = new Rational(numer * other.denom + denom * other.numer, denom * other.denom)
 
-  def neg = new Rational(-numer, denom)
-  def sub(other: Rational) = add(other.neg)
+  def unary_- = new Rational(-numer, denom)
+  def - (other: Rational) = this + -other
 }
 
 val x = new Rational(1,2)
 
-x.sub(new Rational(1,3))
+x - (new Rational(1,3))
+
+// FunSets.toString(FunSets.map( _%10==0, 2*_))
+
+def evens: FunSets.FunSet = _ % 2 == 0
+
+FunSets.forall(evens, evens)
