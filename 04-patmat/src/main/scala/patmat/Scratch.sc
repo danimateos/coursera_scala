@@ -1,3 +1,19 @@
+// Assignment
+
+val x = 'a' :: 'b' :: 'a' :: 'b' :: 'c' :: 'c' :: 'c' :: 'b' :: 'c' :: Nil
+
+val y = x.groupBy(x=>x)
+
+val z = y.transform((_, v) => v.length).toList
+
+def makeOrderedLeafList(freqs: List[(Char, Int)]): List[(Char, Int)] =
+  freqs.sortBy( _._2)
+
+val omega = makeOrderedLeafList(z)
+
+
+
+
 { // Video 4.7
   def isort(xs : List[Int]): List[Int] = xs match {
     case Nil => Nil
